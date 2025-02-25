@@ -83,6 +83,7 @@
                         </goals>
                         <configuration>
                             <target>
+                                     //тут и далее у Вас не определено свойство project.build.directory
                                 <delete dir="${project.build.directory}/allure-results" failonerror="false"/>
                                 <mkdir dir="${project.build.directory}/allure-results"/>
                             </target>
