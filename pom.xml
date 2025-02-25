@@ -71,7 +71,6 @@
 
     <build>
         <plugins>
-            <!-- Plugin for cleaning and creating allure-results directory inside target -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -84,9 +83,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <!-- Delete previous allure-results inside target if exists -->
                                 <delete dir="${project.build.directory}/allure-results" failonerror="false"/>
-                                <!-- Create the allure-results directory inside target -->
                                 <mkdir dir="${project.build.directory}/allure-results"/>
                             </target>
                         </configuration>
@@ -94,7 +91,6 @@
                 </executions>
             </plugin>
 
-            <!-- Plugin for running tests and linking Allure results -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -110,7 +106,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Plugin for generating Allure reports after tests -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
@@ -118,12 +113,11 @@
                 <executions>
                     <execution>
                         <id>allure</id>
-                        <phase>post-integration-test</phase>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>serve</goal>
+                            <goal>report</goal>
                         </goals>
                         <configuration>
-                            <!-- Allure will now search results in target/allure-results -->
                             <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                         </configuration>
                     </execution>
